@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuHandler : MonoBehaviour
 {
@@ -10,8 +11,21 @@ public class MainMenuHandler : MonoBehaviour
     public GameObject mainPanel;
     public GameObject helpPanel;
     public GameObject creditsPanel;
+
+    public string mainGameScene;
+    private Text muteText;
+    private void Start() {
+        this.muteText = optionsPanel.transform.GetChild(1).GetChild(0).GetComponent<Text>();
+        this.muteText.text = (GameManager.muteAll ? "Un-mute all" : "Mute all");
+
+        if (!GameManager.muteAll) {
+            AudioManager.Instance.Stop("Upbeat");
+            AudioManager.Instance.Play("Calm");
+        }
+    }
+
     public void StartGame() {
-        SceneManager.LoadScene("Sandbox");
+        SceneManager.LoadScene(mainGameScene);
     }
 
     public void showMainPanel() {
@@ -43,6 +57,11 @@ public class MainMenuHandler : MonoBehaviour
     public void ShowCreditsPanel() {
         optionsPanel.SetActive(false);
         creditsPanel.SetActive(true);
+    }
+
+    public void ToggleMute() {
+        GameManager.Instance.ToggleMute();
+        this.muteText.text = (GameManager.muteAll ? "Un-mute all" : "Mute all");
     }
 
     public void QuitGame() {

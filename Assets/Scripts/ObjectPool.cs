@@ -7,35 +7,25 @@ using Random = UnityEngine.Random;
 public class ObjectPool : MonoBehaviour
 {
     [HideInInspector]
-    public static ObjectPool Instance;
     public List<GameObject> pooledTiles;
+    public List<GameObject> activePooledTiles;
 
     public GameObject[] tilesToPool;
-    [Range(30, 100)]
-    public int numberOfTiles = 30;
+    [Range(10, 100)]
+    public int numberOfTiles = 10;
+    public GameObject tileSpawner;
 
-    private GameObject tileSpawner;
-    private Queue<int> activatedTiles;
-
-    private void Awake() {
-        if (ObjectPool.Instance == null) {
-            ObjectPool.Instance = this;
-        } else {
-            Destroy(this);
-        }
-    }
+    [Header ("Position")]
+    public float yPosition = 0f;
+    public float xRotation = 0f;
 
     private void Start() {
         this.pooledTiles = new List<GameObject>();
-        this.activatedTiles = new Queue<int>();
 
-        this.tileSpawner = GameObject.FindWithTag("TileManager");
-
-        // TODO: Add an extra object for pick-ups
         // 12.5% 0-Tile, 12.5% 1-Tile, 50% 2-Tile, 5% 3-Tile, 20% Pick-ups
-        GameObject tile = null;
         for (int i = 0; i < this.numberOfTiles; ++i) {
-            double spawnPercentage = Math.Floor((double) this.numberOfTiles / (double) (i + 1));
+            GameObject tile = null;
+            double spawnPercentage = Math.Floor(((double) (i + 1) / (double) this.numberOfTiles) * 100f);
 
             if (spawnPercentage <= 12.5f) { // 0-Tile
                 tile = Instantiate(this.tilesToPool[0]) as GameObject;
@@ -57,16 +47,26 @@ public class ObjectPool : MonoBehaviour
                 }
             } else if (spawnPercentage <= 80f) {
                 tile = Instantiate(this.tilesToPool[7]) as GameObject;
+            } else {
+                tile = Instantiate(this.tilesToPool[8]) as GameObject;
             }
 
             if (tile != null) {
-                tile.SetActive(false);
+                tile.transform.SetParent(this.tileSpawner.transform);
                 this.pooledTiles.Add(tile);
+                tile.SetActive(false);
             }
         }
+
+        // Flooring causes the actual count to be less
+        this.numberOfTiles = this.pooledTiles.Count;
     }
 
     public void ActivateTile(float tileOffset) {
+        if (this.numberOfTiles <= this.activePooledTiles.Count) {
+            return;
+        }
+
         GameObject tile = null;
         int selectedIndex = -1;
 
@@ -74,19 +74,23 @@ public class ObjectPool : MonoBehaviour
         {
             selectedIndex = Random.Range(0, this.pooledTiles.Count);
             tile = this.pooledTiles[selectedIndex];
-        } while (!tile.activeInHierarchy);
+        } while (tile.activeInHierarchy);
 
-        activatedTiles.Enqueue(selectedIndex);
+        this.activePooledTiles.Add(tile);
+        this.pooledTiles.RemoveAt(selectedIndex);
         tile.SetActive(true);
         tile.transform.SetParent(this.tileSpawner.transform);
-        tile.transform.position = Vector3.forward * tileOffset;
+        tile.transform.position = new Vector3(0f, this.yPosition, tileOffset);
+        tile.transform.rotation = Quaternion.Euler(this.xRotation, 0f, 0f);
     }
 
     public void DeactivateTile() {
-        if (activatedTiles.Count != 0) {
-            int indexTileToDeactivate = activatedTiles.Dequeue();
+        if (this.activePooledTiles.Count != 0) {
+            GameObject tile = this.activePooledTiles[0];
+            tile.SetActive(false);
+            this.activePooledTiles.RemoveAt(0);
 
-            this.pooledTiles[indexTileToDeactivate].SetActive(false);
+            this.pooledTiles.Add(tile);
         }
     }
 }

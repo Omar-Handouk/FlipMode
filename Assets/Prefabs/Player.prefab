@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 9089357186798835308}
   - component: {fileID: 9089357186798835309}
   - component: {fileID: 9089357186798835310}
+  - component: {fileID: 9089357186798835304}
   - component: {fileID: 9089357186798835305}
   - component: {fileID: 9089357186798835306}
-  - component: {fileID: 9089357186798835304}
+  - component: {fileID: 5838944503509178296}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -90,41 +91,12 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9089357186798835311}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 61264fee61a02ae4a8e5fd910aa00ce2, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &9089357186798835305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9089357186798835311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b3c7856e9923144697f867f4a9cd2ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  horizontalSpeed: 5
-  verticalSpeed: 5
-  sideImpulseMultiplier: 50
-  jumpImpulseMultiplier: 3.5
---- !u!114 &9089357186798835306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9089357186798835311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfaad220ce740a94e9848f2275343a78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerInformation: {fileID: 0}
 --- !u!54 &9089357186798835304
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -141,3 +113,51 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &9089357186798835305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9089357186798835311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b3c7856e9923144697f867f4a9cd2ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontalSpeed: 5
+  verticalSpeed: 5
+  sideImpulseMultiplier: 50
+  jumpImpulseMultiplier: 3.5
+  colorModes:
+  - name: Blue
+    material: {fileID: 2100000, guid: 2b562fdc3c2ef2c4397ef54e189e2906, type: 2}
+  - name: Cyan
+    material: {fileID: 2100000, guid: 88a207f6a4a678c40957006489d87dbe, type: 2}
+  - name: Yellow
+    material: {fileID: 2100000, guid: bd7ddaf106eb99f44a0a3920c7866fe8, type: 2}
+--- !u!114 &9089357186798835306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9089357186798835311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfaad220ce740a94e9848f2275343a78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInformation: {fileID: 0}
+--- !u!114 &5838944503509178296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9089357186798835311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f3af515e695d274fa9f35c63b790282, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

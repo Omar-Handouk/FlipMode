@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: d4003780c8e6b834396b20ab57bc0041
   - enabled: 1
+    path: Assets/Scenes/FlipMode.unity
+    guid: 966bdd8a5f7b4c4459bba71f8fa7db34
+  - enabled: 0
     path: Assets/Scenes/Sandbox.unity
     guid: 59f7da6d83e450c49a81caed139538f9
   m_configObjects: {}

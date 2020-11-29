@@ -1,0 +1,126 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1211337457795244686
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1211337457795244685}
+  - component: {fileID: 1211337457795244684}
+  m_Layer: 0
+  m_Name: _AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1211337457795244685
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211337457795244686}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 766, y: 384.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1211337457795244684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211337457795244686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e21327e9dec7ccd4f83352f688667181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Calm
+    clip: {fileID: 8300000, guid: 25d52a26c1238d249ac3aac27c4b9d6f, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    is2D: 1
+    isOneShot: 0
+    source: {fileID: 0}
+  - name: Upbeat
+    clip: {fileID: 8300000, guid: 2c9fe1f8b605afa4baaca6c930cce639, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    is2D: 1
+    isOneShot: 0
+    source: {fileID: 0}
+  - name: Collectable
+    clip: {fileID: 8300000, guid: d3ec60ab3d7a8874f863c85fb940635e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    is2D: 1
+    isOneShot: 1
+    source: {fileID: 0}
+  - name: Hit
+    clip: {fileID: 8300000, guid: 3a335d8a366b97344809ca6e6149e6a1, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    is2D: 1
+    isOneShot: 1
+    source: {fileID: 0}
+  - name: UI
+    clip: {fileID: 8300000, guid: cd7c9f64dcf21004e990e38e603d4380, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    is2D: 1
+    isOneShot: 1
+    source: {fileID: 0}
+  - name: Mode
+    clip: {fileID: 8300000, guid: 38969c45479420e4091d505198fee203, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    is2D: 1
+    isOneShot: 1
+    source: {fileID: 0}
+  - name: PowerUp
+    clip: {fileID: 8300000, guid: cd7c9f64dcf21004e990e38e603d4380, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    is2D: 1
+    isOneShot: 1
+    source: {fileID: 0}
+  - name: Wrong
+    clip: {fileID: 8300000, guid: 1983bc8caf4f4c246bebf8af82ba3dfc, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    is2D: 1
+    isOneShot: 1
+    source: {fileID: 0}
+  - name: GameOver
+    clip: {fileID: 8300000, guid: c95d8dd76b58cb54fa8f08ceff168aa5, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    is2D: 1
+    isOneShot: 1
+    source: {fileID: 0}
+  - name: Switch
+    clip: {fileID: 8300000, guid: c830eaa0b673a044da9c2cf0ff1fd5f2, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    is2D: 1
+    isOneShot: 1
+    source: {fileID: 0}

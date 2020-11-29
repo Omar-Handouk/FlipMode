@@ -16,6 +16,11 @@ TagManager:
   - PoolManager
   - TileManager
   - StartPlatforms
+  - Collectable
+  - HP
+  - Score
+  - Health
+  - MainLight
   layers:
   - Default
   - TransparentFX

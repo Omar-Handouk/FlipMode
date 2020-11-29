@@ -11,6 +11,7 @@ public class KeyboardHandler : MonoBehaviour
     private Vector3 movementVector;
     private float horizontalAxis;
     private float verticalAxis;
+    private int lastAccelerometerDirection = 0;
 
     public GameObject playerInformation;
     void Start()
@@ -26,6 +27,10 @@ public class KeyboardHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.isGameOver) {
+            return;
+        }
+
         if (freeMode) {
             this.horizontalAxis = Input.GetAxis("Horizontal");
             this.verticalAxis = Input.GetAxis("Vertical");
@@ -46,23 +51,46 @@ public class KeyboardHandler : MonoBehaviour
 
         this.playerBehaviour.setMovementVector(this.movementVector);
         
+        Vector3 accelerometer = Input.acceleration;
+
+        if (accelerometer.x >= -0.5f && accelerometer.x <= 0.5f && this.lastAccelerometerDirection != 0) {
+            this.lastAccelerometerDirection = 0;
+        } else if (accelerometer.x < -0.5f && this.lastAccelerometerDirection == 0) {
+            this.lastAccelerometerDirection = 1;
+            this.playerBehaviour.setImpulseDirection(1);
+        } else if (accelerometer.x > 0.5f && this.lastAccelerometerDirection == 0) {
+            this.lastAccelerometerDirection = 2;
+            this.playerBehaviour.setImpulseDirection(2);
+        }
+
         // TODO: Change Space behaviour to change platforms
         if (Input.GetKeyDown(KeyCode.O) && this.playerInformation != null) { // Debug Information
             this.playerInformation.SetActive(!playerInformation.activeSelf);
-        } else if (Input.GetKeyDown(KeyCode.Space)) {
+        } else if (Input.GetKeyDown(KeyCode.Space) && freeMode) {
                 this.playerBehaviour.setImpulseDirection(3);
-        } else if (Input.GetKeyDown(KeyCode.P)) {
-            this.cameraBehaviour.setSwitchMode();
+        } else if (Input.GetKeyDown(KeyCode.Space) && !freeMode) { // Flip Mode
+                this.FlipMode();
         } else if (Input.GetKeyDown(KeyCode.I)) { // Change Keyboard Mode
             this.freeMode = !this.freeMode;
-        } else if (Input.GetKeyDown(KeyCode.Q) && freeMode) {
+        } else if (Input.GetKeyDown(KeyCode.Z) && freeMode) {
             this.playerBehaviour.setImpulseDirection(1);
-        } else if (Input.GetKeyDown(KeyCode.E) && freeMode) {
+        } else if (Input.GetKeyDown(KeyCode.X) && freeMode) {
             this.playerBehaviour.setImpulseDirection(2);
         } else if (Input.GetKeyDown(KeyCode.A) && !freeMode) {
             this.playerBehaviour.setImpulseDirection(1);
         } else if (Input.GetKeyDown(KeyCode.D) && !freeMode) {
             this.playerBehaviour.setImpulseDirection(2);
+        } else if (Input.GetKeyDown(KeyCode.R)) {
+            this.playerBehaviour.ChangeColor();
+        } else if (Input.GetKeyDown(KeyCode.E)) {
+            this.playerBehaviour.SetHealth();
+        } else if (Input.GetKeyDown(KeyCode.Q)) {
+            this.playerBehaviour.SetScore();
         }
+    }
+
+    public void FlipMode() {
+        GameManager.isFlipped = !GameManager.isFlipped;
+        AudioManager.Instance.Play("Mode");
     }
 }

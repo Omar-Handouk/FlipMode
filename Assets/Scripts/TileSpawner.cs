@@ -4,42 +4,27 @@ using UnityEngine;
 
 public class TileSpawner : MonoBehaviour
 {
-    [HideInInspector]
-    public static TileSpawner Instance;
-
     public GameObject emptyTile;
+    public ObjectPool objectPool;
 
     private Transform player;
     private const float tileLength = 2.5f;
     private const float playerOffset = 2.5f;
     private float tileOffset = 1.25f;
     private int numberOfTiles;
-    private ObjectPool objectPool;
-
-    private void Awake() {
-        if (TileSpawner.Instance == null) {
-            TileSpawner.Instance = this;
-        } else {
-            Destroy(this);
-        }
-    }
 
     private void Start()
     {
-        // Destroy Debug Platform
-        // TODO: Remove Debug Platform
-        Destroy(GameObject.FindWithTag("Debug Platform"));
-        
         this.player = GameObject.FindWithTag("Player").transform;
-        this.objectPool = GameObject.FindWithTag("PoolManager").GetComponent<ObjectPool>();
         this.numberOfTiles = this.objectPool.numberOfTiles;
 
-        for (int i = 0; i < this.numberOfTiles; ++i) {
-            if (i < 3) {
-                this.SpawnTile(true);
-            } else {
-                this.SpawnTile();
-            }
+        for (int i = 0; i < 3; ++i) {
+            this.SpawnTile(true);
+        }
+
+        for (int i = 0; i < this.numberOfTiles; ++i)
+        {
+            this.SpawnTile();
         }
     }
 
@@ -48,10 +33,11 @@ public class TileSpawner : MonoBehaviour
     {
         this.numberOfTiles = this.objectPool.numberOfTiles;
 
-        if (player.position.z > 6.25f + playerOffset){ // Remove starting platforms
-            GameObject[] startPlatforms = GameObject.FindGameObjectsWithTag("StartPlatforms");
+        // Destroy starting platforms
+        if (player.position.z > 3 * tileLength + playerOffset) { // 3 Starting
+            GameObject[] startingPlatforms = GameObject.FindGameObjectsWithTag("StartPlatforms");
 
-            foreach (GameObject item in startPlatforms)
+            foreach (GameObject item in startingPlatforms)
             {
                 Destroy(item);
             }
@@ -71,7 +57,8 @@ public class TileSpawner : MonoBehaviour
             tile.gameObject.tag = "StartPlatforms";
 
             tile.transform.SetParent(this.transform);
-            tile.transform.position = Vector3.forward * tileOffset;
+            tile.transform.position = new Vector3(0f, this.objectPool.yPosition, tileOffset);
+            tile.transform.rotation = Quaternion.Euler(this.objectPool.xRotation, 0f, 0f);
         } else {
             this.objectPool.ActivateTile(this.tileOffset);
         }
